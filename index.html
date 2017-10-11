@@ -13,11 +13,11 @@
                     <div class="icon icon-small">
                         <img src="https://i.imgur.com/Ftggw2X.png" />
                     </div>
-                    <div class="head">
+                    <!--<div class="head">
                         Avocados:
-                    </div>
+                    </div>-->
                     <div class="counter">
-                        <span class="incr" value="159.4"></span><span> kg</span>
+                        <span class="incr" value="797"></span><span> Avocados</span>
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                         Fleisch:
                     </div>
                     <div class="counter">
-                        <span class="incr" value="9558.5"></span><span> kg</span>
+                        <span class="incr" value="9.56" decimals="2"></span><span> Tonnen</span>
                     </div>
                 </div>
             </div>
@@ -46,13 +46,13 @@
                             Käse:
                         </div>
                         <div class="counter">
-                            <span class="incr" value="597.2"></span><span> kg</span>
+                            <span class="incr" value="0.6" decimals="1"></span><span> Tonnen</span>
                         </div>
                         <div class="head" style="font-size: 13px !important;">
-                            Milchprodukte:
+                            Milch:
                         </div>
                         <div class="counter">
-                            <span class="incr" value="5944.6"></span><span> kg</span>
+                            <span class="incr" value="5.94" decimals="2"></span><span> Tonnen</span>
                         </div>
                     </div>
                 </div>
@@ -63,11 +63,11 @@
                     <div class="icon icon-small">
                         <img src="https://i.imgur.com/MwLyFpf.png" />
                     </div>
-                    <div class="head">
+                    <!--<div class="head">
                         Eier:
-                    </div>
+                    </div>-->
                     <div class="counter">
-                        <span class="incr" value="37233.5"></span><span> kg</span>
+                        <span class="incr" value="37.2"></span><span> Eier</span>
                     </div>
                 </div>
             </div>
@@ -131,12 +131,12 @@
                         Bananen:
                     </div>
                     <div class="counter">
-                        <span class="incr" value="2723.6"></span><span> kg</span>
+                        <span class="incr" value="2.72" decimals="2"></span><span> Tonnen</span>
                     </div>
                 </div>
             </div>
 
-            <div class="card card-big" style="background-color: #2ecc71" data-toggle="tooltip" title="[11] Konsumierte Tomaten weltweit pro Jahr in kg: 170.750.767.000 [12] Konsumierte Kartoffeln weltweit pro Jahr in kg: 312.700.000.000">
+            <div class="card card-big" style="background-color: #F89406" data-toggle="tooltip" title="[11] Konsumierte Tomaten weltweit pro Jahr in kg: 170.750.767.000 [12] Konsumierte Kartoffeln weltweit pro Jahr in kg: 312.700.000.000">
                 <div class="content-wrapper-big">
                     <div class="icon icon-big">
                         <img src="https://i.imgur.com/USNMjNO.png" />
@@ -146,13 +146,13 @@
                             Tomaten:
                         </div>
                         <div class="counter">
-                            <span class="incr" value="5410.8"></span><span> kg</span>
+                            <span class="incr" value="5.41" decimals="2"></span><span> Tonnen</span>
                         </div>
                         <div class="head">
-                            Kartoffelproduktion:
+                            Kartoffeln:
                         </div>
                         <div class="counter">
-                            <span class="incr" value="9908.9"></span>
+                            <span class="incr" value="9.90" decimals="2"></span><span> Tonnen</span>
                         </div>
                     </div>
                 </div>
@@ -167,7 +167,7 @@
                         Soja:
                     </div>
                     <div class="counter">
-                        <span class="incr" value="8.9"></span><span>kg</span>
+                        <span class="incr" value="8.87" decimals="2"></span><span> Tonnen</span>
                     </div>
                 </div>
             </div>
@@ -181,7 +181,7 @@
                         Kaffee:
                     </div>
                     <div class="counter">
-                        <span class="incr" value="28.9"></span><span>Tassen</span>
+                        <span class="incr" value="28935"></span><span> Tassen</span>
                     </div>
                 </div>
             </div>
@@ -191,11 +191,11 @@
                     <div class="icon icon-small">
                         <img src="https://i.imgur.com/KR2BX0N.png" />
                     </div>
-                    <div class="head" style="font-size: 11px !important; white-space: nowrap;">
+                    <div class="head">
                         Weggeworfene Nahrungsmittel:
                     </div>
                     <div class="counter">
-                        <span class="incr" value="41.2"></span>€</span>
+                        <span class="incr" value="41.19" decimals="2"></span> Tonnen</span>
                     </div>
                 </div>
             </div>
@@ -228,21 +228,23 @@
 <script type="text/javascript">
         (function() {
             var counters = document.getElementsByClassName('incr');
-            var pairs = []
+            var items = []
             for (var i = 0; i < counters.length; i++) {
                 var item = counters[i];
                 var value = +item.getAttribute('value');
+                var decimals = +item.getAttribute('decimals');
                 var id = item.getAttribute('id');
-                pairs.push({
+                items.push({
                     item: item,
-                    value: value
+                    value: value,
+                    decimals: decimals
                 })
             }
             setInterval(function(){
-                pairs.forEach(function(pair) {
-                    var curr = +pair.item.innerHTML;
-                    var newValue = curr + pair.value/10;
-                    pair.item.innerHTML = pair.value < 1 ? newValue.toFixed(2) : Math.ceil(newValue);
+                items.forEach(function(item) {
+                    var curr = +item.item.innerHTML;
+                    var newValue = curr + item.value / 10;
+                    item.item.innerHTML = item.decimals || item.value < 1 ? newValue.toFixed(item.decimals) : Math.ceil(newValue);
                 }); 
             }, 100);
         })();
